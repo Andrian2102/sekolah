@@ -14,7 +14,8 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        //
+        $siswa = siswa::all();
+    	return view('manageSiswa', ['siswa' => $siswa]);
     }
 
     /**
@@ -24,7 +25,7 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -35,7 +36,25 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+                
+        $this->validate($request,[
+            'kelas_id' => ['required'],
+            'name' => ['required', 'string'],
+            'jurusan' => ['required', 'string'],
+            'foto' => ['required', 'mimes:jpeg,png,jpg,gif,svg'],
+        ]);
+    
+        $imageName = time().'.'.$request->image->extension();
+
+        $request->foto->move(public_path('images'), $imageName);
+
+        $update = new siswa();
+        $update->kelas_id = $request->kelas_id;
+        $update->name = $request->name;
+        $update->jurusan = $request->jurusan;
+        $update->foto = $imageName;
+        $update->save();
+        return redirect('manageSiswa')->with('success','Siswa created successfully!');
     }
 
     /**
@@ -46,7 +65,8 @@ class SiswaController extends Controller
      */
     public function show(siswa $siswa)
     {
-        //
+        $siswa = siswa::find($id);
+        return view('', ['siswa' => $siswa]);
     }
 
     /**
@@ -69,7 +89,24 @@ class SiswaController extends Controller
      */
     public function update(Request $request, siswa $siswa)
     {
-        //
+        $this->validate($request,[
+            'kelas_id' => ['required'],
+            'name' => ['required', 'string'],
+            'jurusan' => ['required', 'string'],
+            'foto' => ['required', 'mimes:jpeg,png,jpg,gif,svg'],
+        ]);
+    
+        $imageName = time().'.'.$request->image->extension();
+
+        $request->foto->move(public_path('images'), $imageName);
+
+        $update = siswa::find($id);
+        $update->kelas_id = $request->kelas_id;
+        $update->name = $request->name;
+        $update->jurusan = $request->jurusan;
+        $update->foto = $imageName;
+        $update->save();
+        return redirect('/manageSiswa')->with('success','Siswa created successfully!');
     }
 
     /**
@@ -80,6 +117,8 @@ class SiswaController extends Controller
      */
     public function destroy(siswa $siswa)
     {
-        //
+        $siswa = siswa::find($id);
+        $siswa->delete();
+        return redirect('/manageSiswa');
     }
 }

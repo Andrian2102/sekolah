@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/dashboard', function () {
+    return view('dashboard');
 });
+
+Route::get('/login', 'AdminController@showLoginForm')->name('login');
+Route::post('/login', 'AdminController@login')->name('login.post');
+Route::post('/logout', 'AdminController@logout')->name('logout');
+
+Route::get('/students', [StudentController::class, 'index'])->name('students.index');

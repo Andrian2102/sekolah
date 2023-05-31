@@ -9,7 +9,7 @@ class AdminController extends Controller
 {
     public function showLoginForm()
     {
-        return view('admin.login');
+        return view('login');
     }
 
     public function login(Request $request)
@@ -18,7 +18,7 @@ class AdminController extends Controller
 
         if (Auth::guard('admin')->attempt($credentials)) {
             // Authentication passed
-            return redirect()->intended('/admin/dashboard');
+            return redirect()->intended('/dashboard');
         }
 
         // Authentication failed

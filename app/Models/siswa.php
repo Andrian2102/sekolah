@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use App\Models\kelas;
 use Illuminate\Database\Eloquent\Model;
 
 class siswa extends Model

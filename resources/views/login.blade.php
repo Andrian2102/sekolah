@@ -10,12 +10,12 @@
         <p>{{ session('error') }}</p>
     @endif
 
-    <form method="POST" action="{{ route('admin.login.post') }}">
+    <form method="POST" action="{{ route('login.post') }}">
         @csrf
 
         <div>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required autofocus>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required autofocus>
         </div>
 
         <div>

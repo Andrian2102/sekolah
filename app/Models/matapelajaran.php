@@ -1,18 +1,15 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use App\Models\guru;
 use Illuminate\Database\Eloquent\Model;
 
-class kelas extends Model
+class matapelajaran extends Model
 {
     protected $fillable = [
         'name',
     ];
-
-    public function siswas(){
-        return $this->hasMany(siswa::class);
-    }
 
     public function gurus(){
         return $this->hasOne(guru::class);

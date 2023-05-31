@@ -1,8 +1,10 @@
 <?php
 
-namespace App;
-
+namespace App\Models;
+use App\Models\kelas;
+use App\Models\matapelajarans;
 use Illuminate\Database\Eloquent\Model;
+
 
 class guru extends Model
 {
